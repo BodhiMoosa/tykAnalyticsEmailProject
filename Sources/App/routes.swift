@@ -79,7 +79,9 @@ func routes(_ app: Application) throws {
     }
     
     app.get("test") { req -> EventLoopFuture<String> in
+        req.logger.info("endpoint reached")
         return NetworkManager.shared.getErrorsFromCallLogsEndpoint(req: req, howManyDaysAgo: 1).map { object in
+            req.logger.info("network request made")
             let errorObjects =  getErrorsByKey(object: object)
             if errorObjects.count > 0 {
                 var bodyString = ""
@@ -111,9 +113,11 @@ func routes(_ app: Application) throws {
                     bodyString.append(stringToAppend)
                     
                 }
+                req.logger.info("email sent")
                 let emails = SendGridManager.shared.createEmails(to: GlobalVariables.shared.toEmailAddresses, body: bodyString)
                 SendGridManager.shared.sendAllEmails(req: req, emails: emails)
             } else {
+                req.logger.info("email sent")
                 let emails = SendGridManager.shared.createEmails(to: GlobalVariables.shared.toEmailAddresses, body: "There are no errors to report")
                 SendGridManager.shared.sendAllEmails(req: req, emails: emails)
             }

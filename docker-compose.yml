@@ -20,14 +20,16 @@ volumes:
   db_data:
 
 x-shared_environment: &shared_environment
-  LOG_LEVEL: ${LOG_LEVEL:-debug}
-  TO_ADDRESS: ""
-  FROM_EMAIL: ""
-  ADMIN_BASE_URL: ""
-  HOUR_FOR_EMAIL: ""
-  TYK_AUTH_KEY: ""
-  EMAIL_SUBJECT: ""
-  SENDGRID_API_KEY: ""
+    LOG_LEVEL: ${LOG_LEVEL:-debug}
+    TO_ADDRESS: "bodhimoosa@gmail.com"
+    FROM_EMAIL: "donotreply@seraphoxsolutions.com"
+    ADMIN_BASE_URL: "https://obedient-postage-adm.aws-use1.cloud-ara.tyk.io"
+    HOUR_FOR_EMAIL: "20"
+    TYK_AUTH_KEY: "ed1f2ec7043d4e64610c7ba563ded519"
+    EMAIL_SUBJECT: "subject line here"
+    SENDGRID_API_KEY: "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"
+  
+  
   
 
 services:
